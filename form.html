@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            width: 350px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #45a049;
+        }
+    </style>
 </head>
 <body>
-<h1> my new code</h1>
+    <h2>Student Information Form</h2>
+    <form>
+        <!-- Student Name -->
+        <label for="name">Student Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <!-- Class -->
+        <label for="class">Class:</label>
+        <input type="text" id="class" name="class" required>
+
+        <!-- Section -->
+        <label for="section">Section:</label>
+        <input type="text" id="section" name="section" required>
+
+        <!-- Branch -->
+        <label for="branch">Branch:</label>
+        <select id="branch" name="branch" required>
+            <option value="">--Select--</option>
+            <option value="cse">Computer Science</option>
+            <option value="it">Information Technology</option>
+            <option value="ece">Electronics & Communication</option>
+            <option value="me">Mechanical Engineering</option>
+            <option value="ce">Civil Engineering</option>
+        </select>
+
+        <!-- Domain -->
+        <label for="domain">Select Domain:</label>
+        <select id="domain" name="domain" required>
+            <option value="">--Select--</option>
+            <option value="aiml">AI / ML</option>
+            <option value="cyber">Cyber Security</option>
+            <option value="blockchain">Blockchain</option>
+            <option value="cloud">Cloud Computing</option>
+        </select>
+
+        <!-- Submit -->
+        <input type="submit" value="Submit">
+    </form>
 </body>
-</html>gi
+</html>
