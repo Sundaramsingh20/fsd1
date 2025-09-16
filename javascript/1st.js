@@ -7,3 +7,13 @@ let x=7;
 let y=3;
 const total1=x*y;
 console.log(total1);
+
+function add(a,b){
+    return a+b;
+}
+console.log(add(2,5));
+
+function multiply(a,b){
+    return a*b;
+}
+console.log(multiply(4,6));
