@@ -74,7 +74,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Data will be filled by JS -->
       </tbody>
     </table>
 
@@ -112,7 +111,7 @@
       const tbody = document.querySelector("#studentTable tbody");
       tbody.innerHTML = "";
       students.forEach(s => {
-        let row = `<tr><td>${s.name}</td><td>${s.marks}</td></tr>`; // ✅ Fixed with backticks
+        let row = `<tr><td>${s.name}</td><td>${s.marks}</td></tr>`; 
         tbody.innerHTML += row;
       });
       document.getElementById("sortedInfo").innerText = "";
@@ -159,8 +158,6 @@
       students = [...sampleData];
       displayStudents();
     }
-
-    // initial load
     displayStudents();
   </script>
 </body>
