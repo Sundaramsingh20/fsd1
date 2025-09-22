@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Marks System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    h2 {
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: gray;
+      margin-bottom: 15px;
+    }
+    .controls {
+      width: 30%;
+      padding: 15px;
+    }
+    .controls button {
+      display: inline-block;
+      margin: 5px 5px 10px 0;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #4f46e5;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .controls button:hover {
+      background-color: #3730a3;
+    }
+    .controls input {
+      padding: 8px;
+      margin: 5px 0;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+      width: 95%;
+    }
+    #sortedInfo {
+      font-style: italic;
+      margin-top: 10px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h2>Student Marks System</h2>
+    <p class="subtitle">A simple reference demo to practice JavaScript arrays, add/remove/sort data, and find max.</p>
+
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be filled by JS -->
+      </tbody>
+    </table>
+
+    <p id="sortedInfo"></p>
+  </div>
+
+  <div class="controls">
+    <button onclick="showHighest()">Show Highest</button>
+    <button onclick="showAverage()">Show Average</button>
+    <br>
+    <button onclick="sortByMarks()">Sort by Marks</button>
+    <button onclick="resetSample()">Reset Sample</button>
+    <br>
+    <button onclick="removeLast()">Remove Last</button>
+
+    <p><b>Add a student</b></p>
+    <input type="text" id="newName" placeholder="Student name">
+    <input type="number" id="newMarks" placeholder="Marks (0–100)">
+    <button onclick="addStudent()">Add Student</button>
+  </div>
+
+  <script>
+    let sampleData = [
+      { name: "Divya", marks: 98 },
+      { name: "Karan", marks: 95 },
+      { name: "Priya", marks: 92 },
+      { name: "Sneha", marks: 88 },
+      { name: "Amit", marks: 85 },
+      { name: "Rahul", marks: 76 }
+    ];
+
+    let students = [...sampleData];
+
+    function displayStudents() {
+      const tbody = document.querySelector("#studentTable tbody");
+      tbody.innerHTML = "";
+      students.forEach(s => {
+        let row = `<tr><td>${s.name}</td><td>${s.marks}</td></tr>`; // ✅ Fixed with backticks
+        tbody.innerHTML += row;
+      });
+      document.getElementById("sortedInfo").innerText = "";
+    }
+
+    function showHighest() {
+      if (students.length === 0) return alert("No students!");
+      let top = students.reduce((max, s) => s.marks > max.marks ? s : max, students[0]);
+      alert(`Highest Scorer: ${top.name} (${top.marks} marks)`);
+    }
+
+    function showAverage() {
+      if (students.length === 0) return alert("No students!");
+      let avg = students.reduce((sum, s) => sum + s.marks, 0) / students.length;
+      alert(`Class Average: ${avg.toFixed(2)} marks`);
+    }
+
+    function sortByMarks() {
+      students.sort((a, b) => b.marks - a.marks);
+      displayStudents();
+      document.getElementById("sortedInfo").innerText = "Sorted students by marks (highest → lowest)";
+    }
+
+    function removeLast() {
+      if (students.length === 0) return alert("No students to remove!");
+      students.pop();
+      displayStudents();
+    }
+
+    function addStudent() {
+      let name = document.getElementById("newName").value.trim();
+      let marks = parseInt(document.getElementById("newMarks").value);
+      if (!name || isNaN(marks)) {
+        alert("Please enter valid name and marks!");
+        return;
+      }
+      students.push({ name, marks });
+      displayStudents();
+      document.getElementById("newName").value = "";
+      document.getElementById("newMarks").value = "";
+    }
+
+    function resetSample() {
+      students = [...sampleData];
+      displayStudents();
+    }
+
+    // initial load
+    displayStudents();
+  </script>
+</body>
+</html>

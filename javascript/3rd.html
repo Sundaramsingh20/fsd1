@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Marks System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 300px;
+      margin-bottom: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      text-align: left;
+    }
+    th {
+      background: #f4f4f4;
+    }
+    button {
+      margin: 4px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #6c63ff;
+      color: white;
+    }
+    button:hover {
+      background-color: #5148d9;
+    }
+    .output {
+      margin-top: 10px;
+      font-weight: bold;
+      color: darkblue;
+    }
+  </style>
+</head>
+<body>
+  <h2>Student Marks System</h2>
+  <p>Total students: <span id="total"></span></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Marks</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+
+  <div>
+    <button onclick="showHighest()">Show Highest</button>
+    <button onclick="showAverage()">Show Average</button>
+    <button onclick="sortByMarks()">Sort by Marks</button>
+    <button onclick="removeLast()">Remove Last</button>
+    <button onclick="resetData()">Reset Example</button>
+  </div>
+
+  <div style="margin-top:10px;">
+    <input type="text" id="newName" placeholder="Student name">
+    <input type="number" id="newMarks" placeholder="Marks (0-100)">
+    <button onclick="addStudent()">Add Student</button>
+  </div>
+
+  <div class="output" id="output"></div>
+
+  <script>
+   
+    let students = [
+      { name: "Divya", marks: 98 },
+      { name: "Karan", marks: 95 },
+      { name: "Priya", marks: 92 },
+      { name: "Sneha", marks: 83 },
+      { name: "Anant", marks: 85 },
+      { name: "Rahul", marks: 76 }
+    ];
+    let backup = [...students]; 
+
+   
+    function displayStudents() {
+      const table = document.getElementById("studentTable");
+      table.innerHTML = "";
+      students.forEach(s => {
+        let row = <tr><td>${s.name}</td><td>${s.marks}</td></tr>;
+        table.innerHTML += row;
+      });
+      document.getElementById("total").textContent = students.length;
+    }
+
+    
+    function showHighest() {
+      if (students.length === 0) return;
+      let top = students.reduce((a, b) => a.marks > b.marks ? a : b);
+      document.getElementById("output").textContent =
+        Highest: ${top.name} (${top.marks});
+    }
+
+    
+    function showAverage() {
+      if (students.length === 0) return;
+      let avg = students.reduce((sum, s) => sum + s.marks, 0) / students.length;
+      document.getElementById("output").textContent =
+        Average Marks: ${avg.toFixed(2)};
+    }
+
+    
+    function sortByMarks() {
+      students.sort((a, b) => b.marks - a.marks);
+      displayStudents();
+      document.getElementById("output").textContent =
+        "Sorted students by marks (highest → lowest)";
+    }
+
+   
+    function removeLast() {
+      students.pop();
+      displayStudents();
+    }
+
+    
+    function resetData() {
+      students = [...backup];
+      displayStudents();
+      document.getElementById("output").textContent = "";
+    }
+
+    // Add new student
+    function addStudent() {
+      let name = document.getElementById("newName").value.trim();
+      let marks = parseInt(document.getElementById("newMarks").value);
+      if (!name || isNaN(marks)) {
+        alert("Please enter valid name and marks!");
+        return;
+      }
+      students.push({ name, marks });
+      displayStudents();
+      document.getElementById("newName").value = "";
+      document.getElementById("newMarks").value = "";
+    }
+
+    // Load initial table
+    displayStudents();
+  </script>
+</body>
+</html>
