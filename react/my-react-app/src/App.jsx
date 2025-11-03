@@ -6,6 +6,7 @@ import Car from './vehicles.jsx';
 import Fruits from './Fruits.jsx';
 import Greeting from './Greetings.jsx';
 
+
 function App() {
   const [count, setCount] = useState(0)
 
